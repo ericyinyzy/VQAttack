@@ -1,0 +1,31 @@
+train_file: ['.../albef_data/data/vqa_train.json',
+             '.../albef_data/data/vqa_val.json',
+             '.../albef_data/data/vg_qa.json']
+             
+test_file: ['.../albef_data/data/vqa_val.json']
+answer_list: '.../albef_data/data/answer_list.json'
+
+vqa_root: '.../albef_data/VQAv2' #train2014/
+vg_root: '.../VG_100K_2'  #image/
+image_res: 480
+batch_size_train: 1
+batch_size_test: 1
+k_test: 128
+
+alpha: 0.4
+distill: True
+warm_up: True
+
+eos: '[SEP]'
+
+bert_config: 'configs/config_bert.json'
+
+optimizer: {opt: adamW, lr: 2e-5, weight_decay: 0.02}
+schedular: {sched: cosine, lr: 2e-5, epochs: 8, min_lr: 1e-6, decay_rate: 1, warmup_lr: 1e-5, warmup_epochs: 4, cooldown_epochs: 0}
+
+
+
+
+
+
+

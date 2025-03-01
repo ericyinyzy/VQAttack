@@ -614,7 +614,7 @@ class Adv_attack:
                     adv_x, loss = pgd.projected_gradient_descent([self.pgd_attack, self.pgd_mlm_attack], adv_img,
                                                                  0.125, 0.01, 20,
                                                                  np.inf, clip_min=-1, clip_max=1,
-                                                                 y=[mlm_labels,ori_img_feats],
+                                                                 y=[mlm_labels,ori_img_feats,ori_txt_feats],
                                                                  time=ii, ori_x=batch['image'].cuda(), ls=old_alg)
                     torch.set_grad_enabled(False)
             else:
@@ -670,7 +670,7 @@ class Adv_attack:
                         adv_x, loss = pgd.projected_gradient_descent([self.pgd_attack, self.pgd_mlm_attack], adv_img,
                                                                      0.125, 0.01, int(iter / 2),
                                                                      np.inf, clip_min=-1, clip_max=1,
-                                                                     y=[mlm_labels,ori_img_feats],
+                                                                     y=[mlm_labels,ori_img_feats,ori_txt_feats],
                                                                      time=ii, ori_x=batch['image'].cuda(), ls=old_alg)
                         if iter_idx == len(iter_list) - 1:
                             torch.set_grad_enabled(False)

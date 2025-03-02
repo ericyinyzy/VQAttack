@@ -606,7 +606,7 @@ class Adv_attack:
                     torch.set_grad_enabled(True)
                     adv_x, loss = pgd.projected_gradient_descent(self.pgd_attack, adv_img, 0.125, 0.01, 40,
                                                                  np.inf, clip_min=-1, clip_max=1,
-                                                                 y=[None, ori_img_feats, None, None, None],
+                                                                 y=[ori_txt_feats, ori_img_feats, None, None, None],
                                                                  time=ii, ori_x=batch['image'].cuda(), ls=old_alg)
                     torch.set_grad_enabled(False)
                 if old_alg == 0:
@@ -632,7 +632,7 @@ class Adv_attack:
                         self.batch[f"text_masks"] = adv_encoding["attention_mask"].cuda()
                         adv_x, loss = pgd.projected_gradient_descent(self.pgd_attack, adv_img, 0.125, 0.01, iter,
                                                                      np.inf, clip_min=-1, clip_max=1,
-                                                                     y=[None, ori_img_feats, None, None, None],
+                                                                     y=[ori_txt_feats, ori_img_feats, None, None, None],
                                                                      time=ii, ori_x=batch['image'].cuda(), ls=old_alg)
                         if iter_idx == len(iter_list) - 1:
                             torch.set_grad_enabled(False)
